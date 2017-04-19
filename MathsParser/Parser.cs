@@ -146,7 +146,7 @@ namespace MathsParser
 				}
 			}
 
-			return expression.IndexOf(")", startPosition, StringComparison.InvariantCulture);
+			throw new ArgumentException("Mismatching brackets found");
 		}
 	}
 }

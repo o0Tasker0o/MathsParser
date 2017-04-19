@@ -95,5 +95,11 @@ namespace MathsParserTests
 		{
 			Assert.AreEqual(1+2*3+4/5.0-6, _parser.Parse("1+2*3+4/5-6"));
 		}
+
+		[Test]
+		public void ParseThrowsExceptionOnMismatchedBrackets()
+		{
+			Assert.Throws<ArgumentException>(() => _parser.Parse("Abs((2"));
+		}
 	}
 }
