@@ -142,7 +142,7 @@ namespace MathsParser
 
 				expression = expression.Replace(functionExpressionToReplace, functionValue.ToString(CultureInfo.InvariantCulture));
 
-				functionPosition = expression.IndexOf("abs", StringComparison.InvariantCultureIgnoreCase);
+				functionPosition = expression.IndexOf(function, StringComparison.InvariantCultureIgnoreCase);
 			}
 
 			return expression;

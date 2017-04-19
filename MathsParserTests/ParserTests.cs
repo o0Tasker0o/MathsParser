@@ -61,9 +61,15 @@ namespace MathsParserTests
 		}
 
 		[Test]
-		public void ParseRecursivelySolves()
+		public void ParseRecursivelySolvesAbsolute()
 		{
 			Assert.AreEqual(6.0, _parser.Parse("1+2+Abs(Abs(Abs(1)) + Abs(2))"));
+		}
+
+		[Test]
+		public void ParseIterativelySolvesFunctions()
+		{
+			Assert.AreEqual(2.0, _parser.Parse("Cos(0) + Cos(6.28318530)"));
 		}
 
 		[Test]
