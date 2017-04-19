@@ -4,7 +4,7 @@ namespace MathsParser
 {
 	public class FunctionRunner
 	{
-		public static float Run(string function, float input)
+		public static double Run(string function, double input)
 		{
 			function = function.ToLower();
 
@@ -13,11 +13,11 @@ namespace MathsParser
 				case "abs":
 					return Math.Abs(input);
 				case "atn":
-					return (float) Math.Atan(input);
+					return Math.Atan(input);
 				case "cos":
-					return (float) Math.Cos(input);
+					return Math.Cos(input);
 				case "exp":
-					return (float) Math.Exp(input);
+					return Math.Exp(input);
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}

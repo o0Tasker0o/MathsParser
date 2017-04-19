@@ -11,7 +11,7 @@ namespace MathsParserTests
 		[TestCase("Abs")]
 		public void RunHandlesAbsolute(string function)
 		{
-			const float input = -1.0f;
+			const double input = -1.0;
 
 			Assert.AreEqual(Math.Abs(input), FunctionRunner.Run(function, input));
 		}
@@ -20,33 +20,33 @@ namespace MathsParserTests
 		[TestCase("Atn")]
 		public void RunHandlesArcTangent(string function)
 		{
-			const float input = -1.0f;
+			const double input = -1.0;
 
-			Assert.AreEqual((float) Math.Atan(input), FunctionRunner.Run(function, input));
+			Assert.AreEqual(Math.Atan(input), FunctionRunner.Run(function, input));
 		}
 
 		[TestCase("cos")]
 		[TestCase("Cos")]
 		public void RunHandlesCosine(string function)
 		{
-			const float input = -1.0f;
+			const double input = -1.0;
 
-			Assert.AreEqual((float)Math.Cos(input), FunctionRunner.Run(function, input));
+			Assert.AreEqual(Math.Cos(input), FunctionRunner.Run(function, input));
 		}
 
 		[TestCase("exp")]
 		[TestCase("Exp")]
 		public void RunHandlesExponent(string function)
 		{
-			const float input = -1.0f;
+			const double input = -1.0;
 
-			Assert.AreEqual((float) Math.Exp(input), FunctionRunner.Run(function, input));
+			Assert.AreEqual(Math.Exp(input), FunctionRunner.Run(function, input));
 		}
 
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
-			Assert.Throws<ArgumentException>(() => FunctionRunner.Run("NotAFunction", 1.0f));
+			Assert.Throws<ArgumentException>(() => FunctionRunner.Run("NotAFunction", 1.0));
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace MathsParser
 			"exp"
 		};
 
-		public float Parse(string expression)
+		public double Parse(string expression)
 		{
 			foreach (var availableFunction in _availableFunctions)
 			{
@@ -23,13 +23,13 @@ namespace MathsParser
 			}
 
 			var elements = expression.Split('+');
-			var numberElements = new List<float>(elements.Length);
+			var numberElements = new List<double>(elements.Length);
 
 			foreach (var element in elements)
 			{
-				float parsedElement;
+				double parsedElement;
 
-				if (!float.TryParse(element, out parsedElement))
+				if (!double.TryParse(element, out parsedElement))
 				{
 					throw new ArgumentException($"{element} is not a valid number");
 				}
