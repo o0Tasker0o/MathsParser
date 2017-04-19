@@ -9,7 +9,7 @@ namespace MathsParser
 	{
 		public float Parse(string expression)
 		{
-			expression = ReplaceAbsolutes(expression);
+			expression = ReplaceFunctions(expression, "abs");
 
 			var elements = expression.Split('+');
 			var numberElements = new List<float>(elements.Length);
@@ -29,9 +29,9 @@ namespace MathsParser
 			return numberElements.Sum(number => number);
 		}
 
-		private string ReplaceAbsolutes(string expression)
+		private string ReplaceFunctions(string expression, string function)
 		{
-			var absolutePosition = expression.IndexOf("abs", StringComparison.InvariantCultureIgnoreCase);
+			var absolutePosition = expression.IndexOf(function, StringComparison.InvariantCultureIgnoreCase);
 
 			while (absolutePosition != -1)
 			{
@@ -44,7 +44,8 @@ namespace MathsParser
 
 				var parsedInput = Parse(functionInput);
 
-				var absoluteValue = Math.Abs(parsedInput);
+				var absoluteValue = FunctionRunner.Run(function, parsedInput);
+
 				expression = expression.Replace(absoluteExpressionToReplace, absoluteValue.ToString(CultureInfo.InvariantCulture));
 
 				absolutePosition = expression.IndexOf("abs", StringComparison.InvariantCultureIgnoreCase);
