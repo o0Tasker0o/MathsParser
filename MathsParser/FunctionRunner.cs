@@ -16,6 +16,8 @@ namespace MathsParser
 					return (float) Math.Atan(input);
 				case "cos":
 					return (float) Math.Cos(input);
+				case "exp":
+					return (float) Math.Exp(input);
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}

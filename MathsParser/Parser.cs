@@ -11,7 +11,8 @@ namespace MathsParser
 		{
 			"abs",
 			"atn",
-			"cos"
+			"cos",
+			"exp"
 		};
 
 		public float Parse(string expression)

@@ -34,6 +34,15 @@ namespace MathsParserTests
 			Assert.AreEqual((float)Math.Cos(input), FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("exp")]
+		[TestCase("Exp")]
+		public void RunHandlesExponent(string function)
+		{
+			const float input = -1.0f;
+
+			Assert.AreEqual((float) Math.Exp(input), FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{

@@ -39,6 +39,15 @@ namespace MathsParserTests
 		}
 
 		[Test]
+		public void ParseReturnsExponentialOfInput()
+		{
+			const float input = 1.0f;
+
+			//This test suffers from a rounding error that should be investigated
+			Assert.AreEqual(FunctionRunner.Run("exp", input), _parser.Parse($"exp({input})"), 0.000001);
+		}
+
+		[Test]
 		public void ParseThrowsExceptionForNonNumericInputs()
 		{
 			Assert.Throws<ArgumentException>(() => _parser.Parse("Abs(THIS IS NOT A NUMBER)"));
