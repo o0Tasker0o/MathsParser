@@ -50,6 +50,13 @@ namespace MathsParserTests
 			Assert.AreEqual(result, FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("fix", -2.4, -2)]
+		[TestCase("Fix", 2.4, 2)]
+		public void RunHandlesFix(string function, double input, int result)
+		{
+			Assert.AreEqual(result, FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{

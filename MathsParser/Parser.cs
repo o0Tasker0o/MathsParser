@@ -13,7 +13,8 @@ namespace MathsParser
 			"atn",
 			"cos",
 			"exp",
-			"int"
+			"int",
+			"fix"
 		};
 
 		public double Parse(string expression)

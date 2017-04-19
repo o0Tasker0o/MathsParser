@@ -20,6 +20,8 @@ namespace MathsParser
 					return Math.Exp(input);
 				case "int":
 					return (int) Math.Floor(input);
+				case "fix":
+					return Math.Sign(input) * (int) Math.Abs(input);
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}

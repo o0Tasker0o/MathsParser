@@ -26,39 +26,20 @@ namespace MathsParserTests
 		}
 
 		[Test]
-		public void ParseReturnsArctangentOfInput()
-		{
-			const double input = 1.0;
-			Assert.AreEqual(FunctionRunner.Run("atn", input), _parser.Parse($"Atn({input})"), 0.000001);
-		}
-
-		[Test]
-		public void ParseReturnsCosineOfInput()
-		{
-			const double input = 1.0;
-			Assert.AreEqual(FunctionRunner.Run("cos", input), _parser.Parse($"Cos({input})"), 0.000001);
-		}
-
-		[Test]
-		public void ParseReturnsExponentialOfInput()
-		{
-			const double input = 1.0;
-
-			Assert.AreEqual(FunctionRunner.Run("exp", input), _parser.Parse($"exp({input})"), 0.000001);
-		}
-
-		[Test]
-		public void ParseReturnsIntOfInput()
-		{
-			const double input = 1.2;
-
-			Assert.AreEqual(FunctionRunner.Run("int", input), _parser.Parse($"int({input})"));
-		}
-
-		[Test]
 		public void ParseThrowsExceptionForNonNumericInputs()
 		{
 			Assert.Throws<ArgumentException>(() => _parser.Parse("Abs(THIS IS NOT A NUMBER)"));
+		}
+
+		[TestCase("atn")]
+		[TestCase("cos")]
+		[TestCase("exp")]
+		[TestCase("int")]
+		[TestCase("fix")]
+		public void ParseReturnsFunctions(string function)
+		{
+			const double input = 1.23;
+			Assert.AreEqual(FunctionRunner.Run(function, input), _parser.Parse($"{function}({input})"), 0.000001);
 		}
 
 		[Test]
