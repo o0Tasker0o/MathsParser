@@ -79,9 +79,21 @@ namespace MathsParserTests
 		}
 
 		[Test]
+		public void ParseHandlesNegativeNumbers()
+		{
+			Assert.AreEqual(-3, _parser.Parse("-3"));
+		}
+
+		[Test]
+		public void ParseSubtractsNumbers()
+		{
+			Assert.AreEqual(2-3, _parser.Parse("2-3"));
+		}
+
+		[Test]
 		public void ParseHandlesOperatorPrecedence()
 		{
-			Assert.AreEqual(1+2*3+4/5.0, _parser.Parse("1+2*3+4/5"));
+			Assert.AreEqual(1+2*3+4/5.0-6, _parser.Parse("1+2*3+4/5-6"));
 		}
 	}
 }

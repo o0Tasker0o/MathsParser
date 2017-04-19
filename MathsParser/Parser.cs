@@ -9,12 +9,21 @@ namespace MathsParser
 	{
 		public double Parse(string expression)
 		{
+			expression = expression.Trim();
+
 			foreach (var availableFunction in FunctionRunner.AvailableFunctions)
 			{
 				expression = ReplaceFunctions(expression, availableFunction);
 			}
 
-			var elements = expression.Split('+');
+			var elements = expression.Split('-');
+
+			if (elements.Length > 1)
+			{
+				return ParseSubtraction(elements);
+			}
+
+			elements = expression.Split('+');
 
 			if (elements.Length > 1)
 			{
@@ -70,6 +79,25 @@ namespace MathsParser
 			numberElements.AddRange(elements.Select(Parse));
 
 			return numberElements.Sum(number => number);
+		}
+
+		private double ParseSubtraction(IReadOnlyCollection<string> elements)
+		{
+			var numberElements = new List<double>(elements.Count);
+
+			for (var index = 0; index < elements.Count; ++index)
+			{
+				if (string.IsNullOrEmpty(elements.ElementAt(index)))
+				{
+					numberElements.Add(0);
+				}
+				else
+				{
+					numberElements.Add(Parse(elements.ElementAt(index)));
+				}
+			}
+
+			return numberElements.Aggregate((a, b) => a - b);
 		}
 
 		private string ReplaceFunctions(string expression, string function)
