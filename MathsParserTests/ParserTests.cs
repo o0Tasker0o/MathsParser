@@ -73,9 +73,15 @@ namespace MathsParserTests
 		}
 
 		[Test]
+		public void ParseDividesNumbers()
+		{
+			Assert.AreEqual(2.0 / 3.0, _parser.Parse("2/3"));
+		}
+
+		[Test]
 		public void ParseHandlesOperatorPrecedence()
 		{
-			Assert.AreEqual(1+2*3+4, _parser.Parse("1+2*3+4"));
+			Assert.AreEqual(1+2*3+4/5.0, _parser.Parse("1+2*3+4/5"));
 		}
 	}
 }

@@ -28,6 +28,13 @@ namespace MathsParser
 				return ParseMultiplication(elements);
 			}
 
+			elements = expression.Split('/');
+
+			if (elements.Length > 1)
+			{
+				return ParseDivision(elements);
+			}
+
 			double parsedElement;
 
 			if (!double.TryParse(elements[0], out parsedElement))
@@ -36,6 +43,15 @@ namespace MathsParser
 			}
 
 			return parsedElement;
+		}
+
+		private double ParseDivision(IReadOnlyCollection<string> elements)
+		{
+			var numberElements = new List<double>(elements.Count);
+
+			numberElements.AddRange(elements.Select(Parse));
+
+			return numberElements.Aggregate((a, b) => a / b);
 		}
 
 		private double ParseMultiplication(IReadOnlyCollection<string> elements)
