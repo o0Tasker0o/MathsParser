@@ -16,6 +16,8 @@ namespace MathsParser
 				expression = ReplaceFunctions(expression, availableFunction);
 			}
 
+			expression = ParseBrackets(expression);
+
 			var elements = expression.Split('-');
 
 			if (elements.Length > 1)
@@ -52,6 +54,27 @@ namespace MathsParser
 			}
 
 			return parsedElement;
+		}
+
+		private string ParseBrackets(string expression)
+		{
+			var bracketPosition = expression.IndexOf("(", StringComparison.InvariantCultureIgnoreCase);
+
+			while (bracketPosition != -1)
+			{
+				bracketPosition += 1;
+				var closingBracketPosition = GetClosingBracketPosition(expression, bracketPosition + 1);
+
+				var bracketResult = Parse(expression.Substring(bracketPosition, closingBracketPosition - bracketPosition));
+
+				var expressionToReplace = expression.Substring(bracketPosition - 1, (closingBracketPosition - bracketPosition) + 2);
+
+				expression = expression.Replace(expressionToReplace, bracketResult.ToString(CultureInfo.InvariantCulture));
+
+				bracketPosition = expression.IndexOf("(", StringComparison.InvariantCultureIgnoreCase);
+			}
+
+			return expression;
 		}
 
 		private double ParseDivision(IReadOnlyCollection<string> elements)

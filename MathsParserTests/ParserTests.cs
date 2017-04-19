@@ -101,5 +101,11 @@ namespace MathsParserTests
 		{
 			Assert.Throws<ArgumentException>(() => _parser.Parse("Abs((2"));
 		}
+
+		[Test]
+		public void ParseHandlesBrackets()
+		{
+			Assert.AreEqual((1+2)*(3+4), _parser.Parse("(1+2)*(3+4)"));
+		}
 	}
 }
