@@ -15,19 +15,43 @@ namespace MathsParser
 			}
 
 			var elements = expression.Split('+');
-			var numberElements = new List<double>(elements.Length);
 
-			foreach (var element in elements)
+			if (elements.Length > 1)
 			{
-				double parsedElement;
-
-				if (!double.TryParse(element, out parsedElement))
-				{
-					throw new ArgumentException($"{element} is not a valid number");
-				}
-
-				numberElements.Add(parsedElement);
+				return ParseAddition(elements);
 			}
+
+			elements = expression.Split('*');
+
+			if (elements.Length > 1)
+			{
+				return ParseMultiplication(elements);
+			}
+
+			double parsedElement;
+
+			if (!double.TryParse(elements[0], out parsedElement))
+			{
+				throw new ArgumentException($"{elements[0]} is not a valid number");
+			}
+
+			return parsedElement;
+		}
+
+		private double ParseMultiplication(IReadOnlyCollection<string> elements)
+		{
+			var numberElements = new List<double>(elements.Count);
+
+			numberElements.AddRange(elements.Select(Parse));
+
+			return numberElements.Aggregate((a, b) => a * b);
+		}
+
+		private double ParseAddition(IReadOnlyCollection<string> elements)
+		{
+			var numberElements = new List<double>(elements.Count);
+
+			numberElements.AddRange(elements.Select(Parse));
 
 			return numberElements.Sum(number => number);
 		}

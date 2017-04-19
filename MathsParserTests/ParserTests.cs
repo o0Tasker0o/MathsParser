@@ -45,7 +45,7 @@ namespace MathsParserTests
 		[Test]
 		public void ParseAddsNumbers()
 		{
-			Assert.AreEqual(6.0, _parser.Parse("1+2+3"));
+			Assert.AreEqual(1+2+3, _parser.Parse("1+2+3"));
 		}
 
 		[Test]
@@ -64,6 +64,18 @@ namespace MathsParserTests
 		public void ParseRecursivelySolves()
 		{
 			Assert.AreEqual(6.0, _parser.Parse("1+2+Abs(Abs(Abs(1)) + Abs(2))"));
+		}
+
+		[Test]
+		public void ParseMultipliesNumbers()
+		{
+			Assert.AreEqual(2*3, _parser.Parse("2*3"));
+		}
+
+		[Test]
+		public void ParseHandlesOperatorPrecedence()
+		{
+			Assert.AreEqual(1+2*3+4, _parser.Parse("1+2*3+4"));
 		}
 	}
 }
