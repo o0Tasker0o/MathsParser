@@ -29,5 +29,23 @@ namespace MathsParserTests
 		{
 			Assert.Throws<ArgumentException>(() => _parser.Parse("Abs(THIS IS NOT A NUMBER)"));
 		}
+
+		[Test]
+		public void ParseAddsNumbers()
+		{
+			Assert.AreEqual(6.0f, _parser.Parse("1+2+3"));
+		}
+
+		[Test]
+		public void ParseReplacesFunctionsThenSolvesAddition()
+		{
+			Assert.AreEqual(6.0f, _parser.Parse("1+2+Abs(-3)"));
+		}
+
+		[Test]
+		public void ParseIgnoresWhitespace()
+		{
+			Assert.AreEqual(6.0f, _parser.Parse("1\n+\r2+\tAbs( -3   )"));
+		}
 	}
 }

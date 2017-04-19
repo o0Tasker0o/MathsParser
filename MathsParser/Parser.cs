@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 
 namespace MathsParser
 {
@@ -6,19 +8,39 @@ namespace MathsParser
 	{
 		public float Parse(string expression)
 		{
-			var openingBracketPosition = expression.IndexOf("(", StringComparison.InvariantCulture) + 1;
-			var closingBracketPosition = expression.IndexOf(")", openingBracketPosition, StringComparison.InvariantCulture);
+			expression = ReplaceAbsolutes(expression);
+			var elements = expression.Split('+');
+			var numberElements = elements.Select(float.Parse);
 
-			var functionInput = expression.Substring(openingBracketPosition, closingBracketPosition - openingBracketPosition);
+			return numberElements.Sum(number => number);
+		}
 
-			float inputValue;
+		private string ReplaceAbsolutes(string expression)
+		{
+			var absolutePosition = expression.IndexOf("abs", StringComparison.InvariantCultureIgnoreCase);
 
-			if (!float.TryParse(functionInput, out inputValue))
+			while (absolutePosition != -1)
 			{
-				throw new ArgumentException($"{nameof(expression)} must be a valid number");
+				var openingBracketPosition = expression.IndexOf("(", absolutePosition, StringComparison.InvariantCulture) + 1;
+				var closingBracketPosition = expression.IndexOf(")", openingBracketPosition, StringComparison.InvariantCulture);
+
+				var functionInput = expression.Substring(openingBracketPosition, closingBracketPosition - openingBracketPosition);
+
+				float inputValue;
+
+				if (!float.TryParse(functionInput, out inputValue))
+				{
+					throw new ArgumentException($"{nameof(expression)} must be a valid number");
+				}
+
+				var absoluteExpressionToReplace = expression.Substring(absolutePosition, (closingBracketPosition - absolutePosition) + 1);
+				var absoluteValue = Math.Abs(float.Parse(functionInput));
+				expression = expression.Replace(absoluteExpressionToReplace, absoluteValue.ToString(CultureInfo.InvariantCulture));
+
+				absolutePosition = expression.IndexOf("abs", StringComparison.InvariantCultureIgnoreCase);
 			}
 
-			return Math.Abs(float.Parse(functionInput));
+			return expression;
 		}
 	}
 }
