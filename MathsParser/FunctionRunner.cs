@@ -1,9 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MathsParser
 {
 	public class FunctionRunner
 	{
+		public static ReadOnlyCollection<string> AvailableFunctions => new ReadOnlyCollection<string>(new List<string>
+		{
+			"abs",
+			"atn",
+			"cos",
+			"exp",
+			"int",
+			"fix"
+		});
+
 		public static double Run(string function, double input)
 		{
 			function = function.ToLower();

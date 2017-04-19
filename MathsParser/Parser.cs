@@ -7,19 +7,9 @@ namespace MathsParser
 {
 	public class Parser
 	{
-		private readonly IEnumerable<string> _availableFunctions = new List<string>
-		{
-			"abs",
-			"atn",
-			"cos",
-			"exp",
-			"int",
-			"fix"
-		};
-
 		public double Parse(string expression)
 		{
-			foreach (var availableFunction in _availableFunctions)
+			foreach (var availableFunction in FunctionRunner.AvailableFunctions)
 			{
 				expression = ReplaceFunctions(expression, availableFunction);
 			}
