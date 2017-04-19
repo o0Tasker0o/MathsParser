@@ -47,5 +47,11 @@ namespace MathsParserTests
 		{
 			Assert.AreEqual(6.0f, _parser.Parse("1\n+\r2+\tAbs( -3   )"));
 		}
+
+		[Test]
+		public void ParseRecursivelySolves()
+		{
+			Assert.AreEqual(6.0f, _parser.Parse("1+2+Abs(Abs(Abs(1)) + Abs(2))"));
+		}
 	}
 }
