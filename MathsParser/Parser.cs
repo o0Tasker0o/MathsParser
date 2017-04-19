@@ -10,7 +10,8 @@ namespace MathsParser
 		private readonly IEnumerable<string> _availableFunctions = new List<string>
 		{
 			"abs",
-			"atn"
+			"atn",
+			"cos"
 		};
 
 		public float Parse(string expression)
