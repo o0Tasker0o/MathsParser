@@ -48,6 +48,14 @@ namespace MathsParserTests
 		}
 
 		[Test]
+		public void ParseReturnsIntOfInput()
+		{
+			const double input = 1.2;
+
+			Assert.AreEqual(FunctionRunner.Run("int", input), _parser.Parse($"int({input})"));
+		}
+
+		[Test]
 		public void ParseThrowsExceptionForNonNumericInputs()
 		{
 			Assert.Throws<ArgumentException>(() => _parser.Parse("Abs(THIS IS NOT A NUMBER)"));

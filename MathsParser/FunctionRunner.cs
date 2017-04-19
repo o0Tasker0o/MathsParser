@@ -18,6 +18,8 @@ namespace MathsParser
 					return Math.Cos(input);
 				case "exp":
 					return Math.Exp(input);
+				case "int":
+					return (int) Math.Floor(input);
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}

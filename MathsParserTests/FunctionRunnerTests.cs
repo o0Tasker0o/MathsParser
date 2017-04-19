@@ -43,6 +43,13 @@ namespace MathsParserTests
 			Assert.AreEqual(Math.Exp(input), FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("int", -2.4, -3)]
+		[TestCase("Int", 2.4, 2)]
+		public void RunHandlesInt(string function, double input, int result)
+		{
+			Assert.AreEqual(result, FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
