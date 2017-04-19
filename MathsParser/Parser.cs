@@ -125,24 +125,24 @@ namespace MathsParser
 
 		private string ReplaceFunctions(string expression, string function)
 		{
-			var absolutePosition = expression.IndexOf(function, StringComparison.InvariantCultureIgnoreCase);
+			var functionPosition = expression.IndexOf(function, StringComparison.InvariantCultureIgnoreCase);
 
-			while (absolutePosition != -1)
+			while (functionPosition != -1)
 			{
-				var openingBracketPosition = expression.IndexOf("(", absolutePosition, StringComparison.InvariantCulture) + 1;
+				var openingBracketPosition = expression.IndexOf("(", functionPosition, StringComparison.InvariantCulture) + 1;
 				var closingBracketPosition = GetClosingBracketPosition(expression, openingBracketPosition);
 
 				var functionInput = expression.Substring(openingBracketPosition, closingBracketPosition - openingBracketPosition);
 
-				var absoluteExpressionToReplace = expression.Substring(absolutePosition, (closingBracketPosition - absolutePosition) + 1);
+				var functionExpressionToReplace = expression.Substring(functionPosition, (closingBracketPosition - functionPosition) + 1);
 
 				var parsedInput = Parse(functionInput);
 
-				var absoluteValue = FunctionRunner.Run(function, parsedInput);
+				var functionValue = FunctionRunner.Run(function, parsedInput);
 
-				expression = expression.Replace(absoluteExpressionToReplace, absoluteValue.ToString(CultureInfo.InvariantCulture));
+				expression = expression.Replace(functionExpressionToReplace, functionValue.ToString(CultureInfo.InvariantCulture));
 
-				absolutePosition = expression.IndexOf("abs", StringComparison.InvariantCultureIgnoreCase);
+				functionPosition = expression.IndexOf("abs", StringComparison.InvariantCultureIgnoreCase);
 			}
 
 			return expression;
