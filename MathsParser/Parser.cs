@@ -7,9 +7,18 @@ namespace MathsParser
 {
 	public class Parser
 	{
+		private readonly IEnumerable<string> _availableFunctions = new List<string>
+		{
+			"abs",
+			"atn"
+		};
+
 		public float Parse(string expression)
 		{
-			expression = ReplaceFunctions(expression, "abs");
+			foreach (var availableFunction in _availableFunctions)
+			{
+				expression = ReplaceFunctions(expression, availableFunction);
+			}
 
 			var elements = expression.Split('+');
 			var numberElements = new List<float>(elements.Length);

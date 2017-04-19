@@ -25,6 +25,13 @@ namespace MathsParserTests
 		}
 
 		[Test]
+		public void ParseReturnsArctangentOfInput()
+		{
+			const float input = 1.0f;
+			Assert.AreEqual(FunctionRunner.Run("atn", input), _parser.Parse($"Atn({input})"));
+		}
+
+		[Test]
 		public void ParseThrowsExceptionForNonNumericInputs()
 		{
 			Assert.Throws<ArgumentException>(() => _parser.Parse("Abs(THIS IS NOT A NUMBER)"));

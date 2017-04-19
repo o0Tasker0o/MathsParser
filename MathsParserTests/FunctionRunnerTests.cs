@@ -16,6 +16,15 @@ namespace MathsParserTests
 			Assert.AreEqual(Math.Abs(input), FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("atn")]
+		[TestCase("Atn")]
+		public void RunHandlesArcTangent(string function)
+		{
+			const float input = -1.0f;
+
+			Assert.AreEqual((float) Math.Atan(input), FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
