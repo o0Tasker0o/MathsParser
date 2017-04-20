@@ -92,6 +92,15 @@ namespace MathsParserTests
 			Assert.AreEqual(Math.Sin(input), FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("sqr")]
+		[TestCase("Sqr")]
+		public void RunHandlesSqr(string function)
+		{
+			const double input = -1.0;
+
+			Assert.AreEqual(Math.Sqrt(input), FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
