@@ -16,7 +16,8 @@ namespace MathsParser
 			"fix",
 			"log",
 			"rnd",
-			"sgn"
+			"sgn",
+			"sin"
 		});
 
 		private static Random _random = new Random(DateTime.Now.Millisecond);
@@ -49,6 +50,8 @@ namespace MathsParser
 						return -1;
 					}
 					return 1;
+				case "sin":
+					return Math.Sin(input);
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}

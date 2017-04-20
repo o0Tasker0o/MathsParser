@@ -83,6 +83,15 @@ namespace MathsParserTests
 			Assert.AreEqual(expectedSign, FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("sin")]
+		[TestCase("Sin")]
+		public void RunHandlesSin(string function)
+		{
+			const double input = -1.0;
+
+			Assert.AreEqual(Math.Sin(input), FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
