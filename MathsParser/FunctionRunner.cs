@@ -15,7 +15,8 @@ namespace MathsParser
 			"int",
 			"fix",
 			"log",
-			"rnd"
+			"rnd",
+			"sgn"
 		});
 
 		private static Random _random = new Random(DateTime.Now.Millisecond);
@@ -42,6 +43,12 @@ namespace MathsParser
 					return Math.Log(input);
 				case "rnd":
 					return _random.NextDouble();
+				case "sgn":
+					if (input < 0.0)
+					{
+						return -1;
+					}
+					return 1;
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}

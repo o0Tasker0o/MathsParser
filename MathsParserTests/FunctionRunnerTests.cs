@@ -76,6 +76,13 @@ namespace MathsParserTests
 			Assert.Less(random, 1);
 		}
 
+		[TestCase("sgn", -5, -1)]
+		[TestCase("Sgn", 5, 1)]
+		public void RunHandlesSgn(string function, double input, int expectedSign)
+		{
+			Assert.AreEqual(expectedSign, FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
