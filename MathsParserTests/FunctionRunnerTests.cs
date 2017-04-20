@@ -57,6 +57,15 @@ namespace MathsParserTests
 			Assert.AreEqual(result, FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("log")]
+		[TestCase("Log")]
+		public void RunHandlesLog(string function)
+		{
+			const double input = -1.0;
+
+			Assert.AreEqual(Math.Log(input), FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{

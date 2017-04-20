@@ -13,7 +13,8 @@ namespace MathsParser
 			"cos",
 			"exp",
 			"int",
-			"fix"
+			"fix",
+			"log"
 		});
 
 		public static double Run(string function, double input)
@@ -34,6 +35,8 @@ namespace MathsParser
 					return (int) Math.Floor(input);
 				case "fix":
 					return Math.Sign(input) * (int) Math.Abs(input);
+				case "log":
+					return Math.Log(input);
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}
