@@ -66,6 +66,16 @@ namespace MathsParserTests
 			Assert.AreEqual(Math.Log(input), FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("rnd")]
+		[TestCase("Rnd")]
+		public void RunHandlesRnd(string function)
+		{
+			var random = FunctionRunner.Run(function, 1);
+
+			Assert.GreaterOrEqual(random, 0);
+			Assert.Less(random, 1);
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
