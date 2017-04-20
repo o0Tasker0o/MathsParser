@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BracketToken.cs" />
+    <Compile Include="BracketTokeniser.cs" />
     <Compile Include="FunctionRunner.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

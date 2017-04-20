@@ -58,20 +58,23 @@ namespace MathsParser
 
 		private string ParseBrackets(string expression)
 		{
-			var bracketPosition = expression.IndexOf("(", StringComparison.InvariantCultureIgnoreCase);
+			var bracketElements = BracketTokeniser.Tokenise(expression).ToList();
 
-			while (bracketPosition != -1)
+			if (bracketElements.Count > 1)
 			{
-				bracketPosition += 1;
-				var closingBracketPosition = GetClosingBracketPosition(expression, bracketPosition + 1);
+				expression = "";
 
-				var bracketResult = Parse(expression.Substring(bracketPosition, closingBracketPosition - bracketPosition));
-
-				var expressionToReplace = expression.Substring(bracketPosition - 1, (closingBracketPosition - bracketPosition) + 2);
-
-				expression = expression.Replace(expressionToReplace, bracketResult.ToString(CultureInfo.InvariantCulture));
-
-				bracketPosition = expression.IndexOf("(", StringComparison.InvariantCultureIgnoreCase);
+				foreach (var bracketElement in bracketElements)
+				{
+					if (bracketElement.IsBracketed)
+					{
+						expression += Parse(bracketElement.Value);
+					}
+					else
+					{
+						expression += bracketElement.Value;
+					}
+				}
 			}
 
 			return expression;
