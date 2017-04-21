@@ -18,7 +18,8 @@ namespace MathsParser
 			"rnd",
 			"sgn",
 			"sin",
-			"sqr"
+			"sqr",
+			"tan"
 		});
 
 		private static Random _random = new Random(DateTime.Now.Millisecond);
@@ -55,6 +56,8 @@ namespace MathsParser
 					return Math.Sin(input);
 				case "sqr":
 					return Math.Sqrt(input);
+				case "tan":
+					return Math.Tan(input);
 				default:
 					throw new ArgumentException($"{function} is not recognised");
 			}

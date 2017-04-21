@@ -101,6 +101,15 @@ namespace MathsParserTests
 			Assert.AreEqual(Math.Sqrt(input), FunctionRunner.Run(function, input));
 		}
 
+		[TestCase("tan")]
+		[TestCase("Tan")]
+		public void RunHandlesTan(string function)
+		{
+			const double input = -1.0;
+
+			Assert.AreEqual(Math.Tan(input), FunctionRunner.Run(function, input));
+		}
+
 		[Test]
 		public void RunThrowsExceptionForUnknownFunction()
 		{
